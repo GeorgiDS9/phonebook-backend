@@ -58,6 +58,16 @@ app.get("/info", (request, response) => {
   `);
 });
 
+app.get("/api/persons/:id", (request, response) => {
+  const id = request.params.id;
+  const person = phonebookList.find((person) => person.id === id);
+  if (person) {
+    response.json(person);
+  } else {
+    response.status(404).end();
+  }
+});
+
 // app.post("/api/notes", (request, response) => {
 //   const body = request.body;
 //   if (!body.content) {
