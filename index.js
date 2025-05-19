@@ -49,9 +49,14 @@ app.get("/api/persons", (request, response) => {
   response.json(phonebookList);
 });
 
-// app.get("/api/notes", (request, response) => {
-//   response.json(notes);
-// });
+app.get("/info", (request, response) => {
+  const currentTime = new Date();
+  const entriesCount = phonebookList.length;
+  response.send(`
+    <p>Phonebook has info for ${entriesCount} people</p>
+    <p>${currentTime}</p>
+  `);
+});
 
 // app.post("/api/notes", (request, response) => {
 //   const body = request.body;
