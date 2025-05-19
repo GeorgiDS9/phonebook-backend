@@ -16,4 +16,8 @@ Course website (Part 3): [Full Stack Open](https://fullstackopen.com/en/part3)
 
 Each subdirectory contains its own React application with specific instructions on how to run it.
 
-You will need to run `npm install` and then `npm run dev` in each subdirectory to start the development server for each separate project.
+You will need to run `npm install` and then, for:
+
+_Development build_: `npm run dev` in each subdirectory to start the development server for each separate project
+
+_Production build_: `npm start` (which would be copupled with the `npm run build` which needs to be run in the FE repo)
