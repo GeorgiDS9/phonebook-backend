@@ -5,26 +5,26 @@ const app = express();
 app.use(express.json());
 app.use(morgan("tiny"));
 
-let notes = [
+const phonebookList = [
   {
     id: "1",
-    content: "HTML is easy",
-    important: true,
+    name: "Arto Hellas",
+    number: "040-123456",
   },
   {
     id: "2",
-    content: "Browser can execute only JavaScript",
-    important: false,
+    name: "Ada Lovelace",
+    number: "39-44-5323523",
   },
   {
     id: "3",
-    content: "GET and POST are the most important methods of HTTP protocol",
-    important: true,
+    name: "Dan Abramov",
+    number: "12-43-234345",
   },
   {
     id: "4",
-    content: "GET and POST are the most important methods of HTTP protocol",
-    important: true,
+    name: "Mary Poppendieck",
+    number: "39-23-6423122",
   },
 ];
 
@@ -45,31 +45,31 @@ app.use(
 
 // API ENDPOINTS
 
-app.get("/", (request, response) => {
-  response.send("<h1>Hello World!</h1>");
+app.get("/api/persons", (request, response) => {
+  response.json(phonebookList);
 });
 
-app.get("/api/notes", (request, response) => {
-  response.json(notes);
-});
+// app.get("/api/notes", (request, response) => {
+//   response.json(notes);
+// });
 
-app.post("/api/notes", (request, response) => {
-  const body = request.body;
-  if (!body.content) {
-    return response.status(400).json({
-      error: "content missing",
-    });
-  }
+// app.post("/api/notes", (request, response) => {
+//   const body = request.body;
+//   if (!body.content) {
+//     return response.status(400).json({
+//       error: "content missing",
+//     });
+//   }
 
-  const note = {
-    id: String(notes.length + 1),
-    content: body.content,
-    important: body.important || false,
-  };
-  console.log("Created new note:", note);
-  notes = notes.concat(note);
-  response.json(note);
-});
+//   const note = {
+//     id: String(notes.length + 1),
+//     content: body.content,
+//     important: body.important || false,
+//   };
+//   console.log("Created new note:", note);
+//   notes = notes.concat(note);
+//   response.json(note);
+// });
 
 const PORT = 3001;
 app.listen(PORT);
