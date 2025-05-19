@@ -99,6 +99,10 @@ app.post("/api/persons", (request, response) => {
   response.json(person);
 });
 
+app.get("*", (req, res) => {
+  res.sendFile("dist/index.html", { root: __dirname });
+});
+
 const PORT = 3001;
 app.listen(PORT);
 console.log(`Server running on port ${PORT}`);
