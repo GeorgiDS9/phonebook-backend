@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(morgan("tiny"));
 
-const phonebookList = [
+let phonebookList = [
   {
     id: "1",
     name: "Arto Hellas",
@@ -68,23 +68,34 @@ app.get("/api/persons/:id", (request, response) => {
   }
 });
 
-// app.post("/api/notes", (request, response) => {
-//   const body = request.body;
-//   if (!body.content) {
-//     return response.status(400).json({
-//       error: "content missing",
-//     });
-//   }
+app.delete("/api/persons/:id", (request, response) => {
+  const id = request.params.id;
+  phonebookList = phonebookList.filter((person) => person.id !== id);
+  response.status(204).end();
+});
 
-//   const note = {
-//     id: String(notes.length + 1),
-//     content: body.content,
-//     important: body.important || false,
-//   };
-//   console.log("Created new note:", note);
-//   notes = notes.concat(note);
-//   response.json(note);
-// });
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
+  if (!body.name || !body.number) {
+    return response.status(400).json({
+      error: "name and number are required",
+    });
+  }
+  if (phonebookList.find((person) => person.name === body.name)) {
+    return response.status(400).json({
+      error: "name must be unique",
+    });
+  }
+
+  const person = {
+    id: String(Date.now() + Math.floor(Math.random() * 10000) + 1),
+    name: body.name,
+    number: body.number,
+  };
+  console.log("Created new person:", person);
+  phonebookList = phonebookList.concat(person);
+  response.json(person);
+});
 
 const PORT = 3001;
 app.listen(PORT);
