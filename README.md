@@ -16,8 +16,48 @@ Course website (Part 3): [Full Stack Open](https://fullstackopen.com/en/part3)
 
 Each subdirectory contains its own React application with specific instructions on how to run it.
 
-You will need to run `npm install` and then, for:
+You will need to run `npm install` and
 
-_Development build_: `npm run dev` in each subdirectory to start the development server for each separate project
+## Development Setup
 
-_Production build_: `npm start` (which would be copupled with the `npm run build` which needs to be run in the FE repo)
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create a `.env` file in the backend directory with your local paths:
+
+```env
+FRONTEND_PATH=<path-to-your-frontend>
+BACKEND_PATH=<path-to-your-backend>
+```
+
+Example:
+
+```env
+FRONTEND_PATH=/Users/username/code/phonebook-frontend
+BACKEND_PATH=/Users/username/code/phonebook-backend
+```
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### Development Mode
+
+```bash
+npm run dev
+```
+
+Runs the app in development mode using nodemon.
+Server will run on http://localhost:3001
+
+### Production Mode
+
+```bash
+npm start
+```
+
+Runs the app in production mode.
+Server will run on the specified PORT or default to 3001.
