@@ -24,7 +24,6 @@ app.use(
     ":method :url :status :res[content-length] - :response-time ms :postData"
   )
 );
-"
 
 // Add error handler middleware
 const errorHandler = (error, request, response, next) => {
