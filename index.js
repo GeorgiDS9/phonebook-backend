@@ -72,7 +72,7 @@ app.delete("/api/persons/:id", (request, response) => {
   });
 });
 
-app.post("/api/persons", async (request, response) => {
+app.post("/api/persons", async (request, response, next) => {
   const body = request.body;
 
   if (!body.name || !body.number) {
