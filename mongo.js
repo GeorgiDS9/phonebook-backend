@@ -22,10 +22,7 @@ const Person = mongoose.model("Person", personSchema);
 if (process.argv.length === 3) {
   // Display all entries
   Person.find({}).then((result) => {
-    console.log("phonebook:");
-    result.forEach((person) => {
-      console.log(`${person.name} ${person.number}`);
-    });
+    console.log(`phonebook has ${result.length} entries`);
     mongoose.connection.close();
   });
 } else if (process.argv.length === 5) {
@@ -39,7 +36,7 @@ if (process.argv.length === 3) {
   });
 
   person.save().then(() => {
-    console.log(`added ${name} number ${number} to phonebook`);
+    console.log(`added person to phonebook`);
     mongoose.connection.close();
   });
 } else {
