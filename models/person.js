@@ -1,15 +1,4 @@
 import mongoose from "mongoose";
-import config from "../utils/config.js";
-import logger from "../utils/logger.js";
-
-mongoose
-  .connect(config.MONGODB_URI)
-  .then(() => {
-    logger.info("connected to MongoDB");
-  })
-  .catch((error) => {
-    logger.error("error connecting to MongoDB:", error.message);
-  });
 
 const personSchema = new mongoose.Schema({
   name: {
