@@ -1,7 +1,8 @@
 import express from "express";
 import morgan from "morgan";
-import "dotenv/config";
 import Person from "./models/person.js";
+import config from "./utils/config.js";
+import logger from "./utils/logger.js";
 
 const app = express();
 
@@ -27,7 +28,7 @@ app.use(
 
 // Add error handler middleware
 const errorHandler = (error, request, response, next) => {
-  console.error(error.message);
+  logger.error(error.message);
 
   if (error.name === "CastError") {
     return response.status(400).send({ error: "malformatted id" });
@@ -112,7 +113,6 @@ app.post("/api/persons", async (request, response, next) => {
 // Error handler middleware must be after routes
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  // console.log(`Server running on port ${PORT}`);
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`);
 });

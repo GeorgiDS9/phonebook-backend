@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
-
-const url = process.env.MONGODB_URI;
+import config from "../utils/config.js";
+import logger from "../utils/logger.js";
 
 mongoose
-  .connect(url)
+  .connect(config.MONGODB_URI)
   .then(() => {
-    // console.log("connected to MongoDB");
+    logger.info("connected to MongoDB");
   })
   .catch((error) => {
-    console.error("error connecting to MongoDB:", error.message);
+    logger.error("error connecting to MongoDB:", error.message);
   });
 
 const personSchema = new mongoose.Schema({
